@@ -22,7 +22,7 @@ class DocumentController {
             const form = formidable(optionsFormidable);
 
             form.parse(req, (err, _, files) => {
-                req.nameBufferFile = files.table.newFilename; 
+                req.nameBufferFile = files.table.newFilename;
                 writerFiles.write(err, files, nameFolder);
                 next();
             });
