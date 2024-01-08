@@ -3,7 +3,6 @@ const ExcelJS = require('exceljs');
 const fs = require('fs/promises');
 const fss = require('fs');
 const Handlebars = require('handlebars');
-const puppeteer = require('puppeteer');
 const archiver = require('archiver');
 const { v4: uuidv4 } = require('uuid');
 
@@ -172,10 +171,10 @@ class DocumentHelper {
                     warrantyModels,
                     `warrantyCard.html`
                 );
-                await this.htmlToPDF(
+                await this.saveHTML(
                     labelsHTML,
                     nameFolder,
-                    `${nameFile}.pdf`,
+                    `${nameFile}.html`,
                     true
                 );
             }
@@ -307,26 +306,31 @@ class DocumentHelper {
     }
 
     // Конвертация HTML в PDF
-    async htmlToPDF(html, nameOfFolder, nameOfFile, landscape = false) {
-        async function generatePDFfromHTML(htmlContent, outputPath) {
-            const browser = await puppeteer.launch({ headless: 'new' });
-            const page = await browser.newPage();
-            await page.setContent(htmlContent);
-            await page.pdf({
-                path: outputPath,
-                format: 'A4',
-                landscape: landscape,
-            });
-            await browser.close();
-        }
+    async saveHTML(html, nameOfFolder, nameOfFile) {
+        await fs.writeFile(`${__dirname}/../tempFiles/${nameOfFolder}/source/${nameOfFile}`, html, 'utf8');
 
-        // Usage
-        await generatePDFfromHTML(
-            html,
-            `${__dirname}/../tempFiles/${nameOfFolder}/source/${nameOfFile}`
-        );
+        // Возможно когда-нибудь приложение задеплою на отдельный сервер, где будет работать puppeteer
+        // для автоматической конвертации html в pdf
+        // если понадобиться, нужно раскоментировать код ниже, установить puppeteer, подправить имена файлов, которые
+        // передаются в эту функцию (нужно расширение файла не .html, а .pdf), поменять название функции на convertHtmlToPdf
 
-        return;
+        // async function generatePDFfromHTML(htmlContent, outputPath) {
+        //     const browser = await puppeteer.launch({ headless: 'new' });
+        //     const page = await browser.newPage();
+        //     await page.setContent(htmlContent);
+        //     await page.pdf({
+        //         path: outputPath,
+        //         format: 'A4',
+        //         landscape: landscape,
+        //     });
+        //     await browser.close();
+        // }
+
+        // // Usage
+        // await generatePDFfromHTML(
+        //     html,
+        //     `${__dirname}/../tempFiles/${nameOfFolder}/source/${nameOfFile}`
+        // );
     }
 
     // Создаем zip файл со всеми файлами
@@ -391,7 +395,7 @@ class DocumentHelper {
                         await this.createPostMoneyLables(
                             models[key],
                             nameFolder,
-                            'postMoneyElit.pdf'
+                            'postMoneyElit.html'
                         );
                         break;
                     case '4':
@@ -399,7 +403,7 @@ class DocumentHelper {
                         await this.createPostMoneyLables(
                             models[key],
                             nameFolder,
-                            'postMoneyPackage.pdf'
+                            'postMoneyPackage.html'
                         );
                         break;
                     default:
@@ -410,12 +414,12 @@ class DocumentHelper {
                     models[key],
                     `${nameFile}.html`
                 );
-                await this.htmlToPDF(labelsHTML, nameFolder, `${nameFile}.pdf`);
+                await this.saveHTML(labelsHTML, nameFolder, `${nameFile}.html`);
             }
         }
     }
 
-    // Создание ярлыков наложенного платежа для вида посылок: Элит
+    // Создание ярлыков наложенного платежа для вида посылок: Элит и Посылок
     async createPostMoneyLables(models, nameFolder, nameFile) {
         const postMoneyModels = models.map((value) => {
             return new PostMoneyModel(value);
@@ -424,7 +428,7 @@ class DocumentHelper {
             postMoneyModels,
             `postMoney.html`
         );
-        await this.htmlToPDF(labelsHTML, nameFolder, nameFile);
+        await this.saveHTML(labelsHTML, nameFolder, nameFile);
     }
 
     // Принудительное удаление временных файлов при ошибке
