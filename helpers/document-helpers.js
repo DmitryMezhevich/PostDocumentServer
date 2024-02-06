@@ -98,6 +98,7 @@ class DocumentHelper {
             48: [],
             50: [],
             4: [],
+            71: [],
         };
 
         model.forEach((value) => {
@@ -110,6 +111,8 @@ class DocumentHelper {
                     break;
                 case 4:
                     object['4'].push(value);
+                case 71:
+                    object['71'].push(value);
                 default:
                     break;
             }
@@ -158,6 +161,9 @@ class DocumentHelper {
                         break;
                     case '4':
                         nameFile = 'warrantyPackage';
+                        break;
+                    case '71':
+                        nameFile = 'warrantyLight';
                         break;
                     default:
                         break;
@@ -214,6 +220,9 @@ class DocumentHelper {
                         break;
                     case '4':
                         nameFile = 'reestr_package_';
+                        break;
+                    case '71':
+                        nameFile = 'reestr_light_';
                         break;
                     default:
                         break;
@@ -389,6 +398,9 @@ class DocumentHelper {
                 switch (key) {
                     case '48':
                         nameFile = 'labelPostStandart';
+                        break;
+                    case '71':
+                        nameFile = 'labelPostLight';
                         break;
                     case '50':
                         nameFile = 'labelPostElit';

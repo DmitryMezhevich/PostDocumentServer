@@ -41,7 +41,7 @@ module.exports = class OrderModel {
                 full: costOfProduct.toFixed(2),
             },
             dateOfDispatch: module.C, // Дата продажи, совподает с датой отгрузки
-            warrantyPeriod: '60 дней', // Срок гарантии
+            warrantyPeriod: '30 дней', // Срок гарантии
             customer: module.S // Покупатель (вид: Иванов И.И.)
                 ? `${module.S} ${module.T.charAt(0).toUpperCase() ?? ''}.${
                       module.U.charAt(0).toUpperCase() ?? ''
@@ -64,6 +64,8 @@ module.exports = class OrderModel {
             typyOfDelivery = 50;
         } else if (module.AD.toLowerCase().includes('пос')) {
             typyOfDelivery = 4;
+        }else if (module.AD.toLowerCase().includes('лай')) {
+            typyOfDelivery = 71;
         }
 
         this.post = {
@@ -78,7 +80,7 @@ module.exports = class OrderModel {
                 index: module.AB, // Индекс
             },
             delivery: {
-                type: typyOfDelivery, // Тип доставки: Стандарт - 48, Элит - 50, Посылка (без ОЦ) - 4
+                type: typyOfDelivery, // Тип доставки: Стандарт - 48, 71 - Лайт, Элит - 50, Посылка (без ОЦ) - 4
                 customer: module.AE.toLowerCase().includes('кл'), // Кто платит за доставку: Клиент(True), Продавец(False)
                 cost: {
                     // Стоимость
