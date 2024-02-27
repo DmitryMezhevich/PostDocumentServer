@@ -1,5 +1,3 @@
-const { format } = require('@vicimpa/rubles');
-
 module.exports = class PostMoneyModel {
     cost;
     recipient;
@@ -9,12 +7,7 @@ module.exports = class PostMoneyModel {
     constructor(module) {
         this.cost = {
             number: module.product.costOfProduct.full,
-            word: `${format(
-                module.product.costOfProduct.full,
-                '$summString'
-            )} ${format(module.product.costOfProduct.full, '$summCurrency')} ${
-                module.product.costOfProduct.float
-            } копеек`,
+            word: module.product.costOfProduct.string,
         };
 
         const rec = module.client;

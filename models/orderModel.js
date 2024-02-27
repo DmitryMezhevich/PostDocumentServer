@@ -1,3 +1,5 @@
+const { format } = require('@vicimpa/rubles');
+
 module.exports = class OrderModel {
     order;
     product;
@@ -5,7 +7,7 @@ module.exports = class OrderModel {
     post;
 
     constructor(module) {
-        const costOfProduct = parseFloat(String(module.K).replace(',', '.'));
+        const costOfProduct = parseFloat(String(module.K).replace(',', '.')) + (module.AD.toLowerCase().includes('лай') ? 3.60 : 0);
         const costOfDelivery = module.AF
             ? parseFloat(String(module.AF).replace(',', '.'))
             : '';
@@ -39,6 +41,13 @@ module.exports = class OrderModel {
                     (costOfProduct - Math.floor(costOfProduct)).toFixed(2) *
                     100,
                 full: costOfProduct.toFixed(2),
+                string: `${format(
+                        costOfProduct.toFixed(2),
+                        '$summString'
+                    )} ${format(costOfProduct.toFixed(2), '$summCurrency')} ${
+                        (costOfProduct - Math.floor(costOfProduct)).toFixed(2) *
+                        100
+                    } копеек`,
             },
             dateOfDispatch: module.C, // Дата продажи, совподает с датой отгрузки
             warrantyPeriod: '30 дней', // Срок гарантии
