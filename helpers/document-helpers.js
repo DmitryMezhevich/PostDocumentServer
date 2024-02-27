@@ -132,13 +132,17 @@ class DocumentHelper {
             return index % 2 === 0 ? options.fn(this) : options.inverse(this);
         });
 
-        Handlebars.registerHelper('if_eq', function (conditional, options) {
-            if (conditional === 50) {
-                return options.fn(this);
-            } else {
-                return options.inverse(this);
-            }
+        Handlebars.registerHelper('ifEvenMoneyPst', function (index, options) {
+            return index === 4 ? options.fn(this) : options.inverse(this);
         });
+
+        // Handlebars.registerHelper('if_eq', function (conditional, options) {
+        //     if (conditional === 50) {
+        //         return options.fn(this);
+        //     } else {
+        //         return options.inverse(this);
+        //     }
+        // });
 
         const template = Handlebars.compile(htmlDoc);
         const result = template({ packages: model });

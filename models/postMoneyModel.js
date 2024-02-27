@@ -2,7 +2,6 @@ module.exports = class PostMoneyModel {
     cost;
     recipient;
     sender;
-    typePost;
 
     constructor(module) {
         this.cost = {
@@ -10,29 +9,26 @@ module.exports = class PostMoneyModel {
             word: module.product.costOfProduct.string,
         };
 
-        const rec = module.client;
-        const recPost = module.post.address;
-        let recAddress = '';
-        recAddress = recPost.index ? `${recPost.index}, ` : '';
-        recAddress += recPost.region ? `${recPost.region} обл., ` : '';
-        recAddress += recPost.district ? `${recPost.district} р-н, ` : '';
-        recAddress += recPost.city ? `нас. пункт ${recPost.city}, ` : '';
-        recAddress += recPost.street ? `${recPost.street} ` : '';
-        recAddress += recPost.house ? `${recPost.house}, ` : '';
-        recAddress += recPost.addHouse ? `корпус ${recPost.addHouse}, ` : '';
-        recAddress += recPost.apartment ? `кв. ${recPost.apartment}, ` : '';
-
         this.recipient = {
-            name: `${rec.surname} ${rec.name} ${rec.patronymic}, ${rec.phone}`,
-            address: recAddress,
+            name: `ИП Межевич Дмитрий Сергеевич`,
+            address: 'УНП: 491643493, BIC: ALFABY2X, ЗАО "Альфа-Банк", IBAN: BY68ALFA30132E03790010270000',
         };
+
+        const send = module.client;
+        const sendPost = module.post.address;
+        let sendAddress = '';
+        sendAddress = sendPost.index ? `${sendPost.index}, ` : '';
+        sendAddress += sendPost.region ? `${sendPost.region} обл., ` : '';
+        sendAddress += sendPost.district ? `${sendPost.district} р-н, ` : '';
+        sendAddress += sendPost.city ? `нас. пункт ${sendPost.city}, ` : '';
+        sendAddress += sendPost.street ? `${sendPost.street} ` : '';
+        sendAddress += sendPost.house ? `${sendPost.house}, ` : '';
+        sendAddress += sendPost.addHouse ? `корпус ${sendPost.addHouse}, ` : '';
+        sendAddress += sendPost.apartment ? `кв. ${sendPost.apartment}, ` : '';
 
         this.sender = {
-            name: 'ИП Межевич Дмитрий Сергеевич, +375 29 560-92-13',
-            address:
-                '220024, г. Минск,  Асаналиева 40Б, До востребования, УНП: 491643493, BIC: ALFABY2X, ЗАО "Альфа-Банк", IBAN: BY68ALFA30132E03790010270000',
+            name: `${send.surname} ${send.name} ${send.patronymic}`,
+            address: sendAddress,
         };
-
-        this.typePost = module.post.delivery.type;
     }
 };
