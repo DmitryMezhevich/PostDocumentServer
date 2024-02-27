@@ -10,8 +10,8 @@ module.exports = class PostMoneyModel {
         };
 
         this.recipient = {
-            name: `ИП Межевич Дмитрий Сергеевич`,
-            address: 'УНП: 491643493, BIC: ALFABY2X, ЗАО "Альфа-Банк", IBAN: BY68ALFA30132E03790010270000',
+            name: module.senderInfo.sender.moneyTransfer.name,
+            address: module.senderInfo.sender.moneyTransfer.address,
         };
 
         const send = module.client;

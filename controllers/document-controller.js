@@ -21,7 +21,8 @@ class DocumentController {
 
             const form = formidable(optionsFormidable);
 
-            form.parse(req, (err, _, files) => {
+            form.parse(req, (err, fields, files) => {
+                req.senderName = fields.selectedOption;
                 req.nameBufferFile = files.table.newFilename;
                 writerFiles.write(err, files, nameFolder);
                 next();
@@ -42,7 +43,7 @@ class DocumentController {
             const jsonData = await documentHalper.xlsxToJSON(req.nameFolder);
 
             const orderModels = jsonData.map((value) => {
-                return new OrderModel(value);
+                return new OrderModel(value, req.senderName);
             });
 
             req.orderModels = orderModels;

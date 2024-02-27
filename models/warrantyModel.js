@@ -1,8 +1,11 @@
 module.exports = class WarrantyModel {
     first;
     second;
+    senderInfo;
 
     constructor(argumentFirst, argumentSecond = '') {
+        this.senderInfo = argumentFirst.senderInfo.sender.warrantyCard;
+
         const first = argumentFirst.product;
         const second = argumentSecond ? argumentSecond.product : '';
 

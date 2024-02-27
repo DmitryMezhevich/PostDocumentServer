@@ -111,8 +111,10 @@ class DocumentHelper {
                     break;
                 case 4:
                     object['4'].push(value);
+                    break;
                 case 71:
                     object['71'].push(value);
+                    break;
                 default:
                     break;
             }
@@ -152,6 +154,8 @@ class DocumentHelper {
 
     // Создание гарантий для: Стандартов, Элетов и Почтовый отправлений
     async createWarranty(models, nameFolder) {
+        let senderInfo = '';
+
         for (const key in models) {
             if (models[key].length !== 0) {
                 let nameFile = '';
@@ -177,6 +181,10 @@ class DocumentHelper {
                     models[key]
                 );
 
+                if (senderInfo === '') {
+                    senderInfo = warrantyModels;
+                }
+
                 const labelsHTML = await this.generateHTML(
                     warrantyModels,
                     `warrantyCard.html`
@@ -189,6 +197,18 @@ class DocumentHelper {
                 );
             }
         }
+
+        // Отдельно делаем последнюю страницу гарантии
+        const labelsHTML = await this.generateHTML(
+            senderInfo,
+            `warrantyCardLastPage.html`
+        );
+        await this.saveHTML(
+            labelsHTML,
+            nameFolder,
+            `warrantyCardLastPage.html`,
+            true
+        );
     }
 
     // Преобразование данных JSON для гарантийных талонов
@@ -270,8 +290,8 @@ class DocumentHelper {
         const sheet = workbook.addWorksheet(tempNameFile); // Добавляем лист
 
         const header = {
-            a: 491643493,
-            b: '13.10.2023',
+            a: models[0].senderInfo.unp,
+            b: models[0].senderInfo.dateOfferPost,
             c: 1000,
             d: models.length,
             e: code, // 48 - E-commers Standart, 50 - E-commers Elit, 4 - посылки без ОЦ,

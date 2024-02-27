@@ -1,8 +1,10 @@
 module.exports = class MailList {
     mailList;
     dateShipment;
+    senderInfo;
 
     constructor(model, index) {
+        this.senderInfo = model.senderInfo.sender.mailList;
         this.dateShipment = model.order.date.dispatch;
         this.mailList = {
             a: index,
@@ -42,14 +44,14 @@ module.exports = class MailList {
             ac: '',
             ad: '',
             ae: '',
-            af: 375295609213,
+            af: model.senderInfo.sender.mailList.phone,
             ag:
                 parseInt(
                     model.client.phone
                         .replace(/\s|-/g, '')
                         .replace(/^80/, '375')
                 ) ?? '',
-            ah: 'ip.miazhevich@gmail.com',
+            ah: model.senderInfo.sender.mailList.email,
         };
     }
 };

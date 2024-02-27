@@ -1,12 +1,16 @@
 const { format } = require('@vicimpa/rubles');
+const SenderInformationModel = require('../models/senderInformationModel');
 
 module.exports = class OrderModel {
     order;
     product;
     client;
     post;
+    senderInfo;
 
-    constructor(module) {
+    constructor(module, name) {
+        this.senderInfo = new SenderInformationModel(name);
+
         const costOfProduct = parseFloat(String(module.K).replace(',', '.')) + (module.AD.toLowerCase().includes('лай') ? 3.60 : 0);
         const costOfDelivery = module.AF
             ? parseFloat(String(module.AF).replace(',', '.'))

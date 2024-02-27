@@ -26,29 +26,29 @@
           <tr id="iys4" style="box-sizing: border-box;">
             <td id="imz5" width="45%" valign="top" style="box-sizing: border-box; font-size: 12px; font-weight: 300; vertical-align: top; color: rgb(111, 119, 125); margin: 0; padding: 0; width: 45%; text-decoration: none;">
               <div id="ioi8" class="text-decoration" style="box-sizing: border-box; padding: 5px 10px 0px 0px; border-collapse: separate; margin: 0 0 0 10px;">
-                <span id="itf1k" style="box-sizing: border-box; font-family: Arial,Helvetica,sans-serif;"><span id="ia0vf" style="box-sizing: border-box; color: #000000;">ИП Межевич Дмитрий Сергеевич, УНП 491643493</span></span>
+                <span id="itf1k" style="box-sizing: border-box; font-family: Arial,Helvetica,sans-serif;"><span id="ia0vf" style="box-sizing: border-box; color: #000000;">{{senderInfo.sender.label.name}}</span></span>
               </div>
               <div id="ihobzg" class="text-decoration" style="box-sizing: border-box; padding: 5px 10px 0px 0px; border-collapse: separate; margin: 0 0 0 10px;">
                 <font color="#000000" id="iuak4" style="box-sizing: border-box;">
-                  <font face="Arial, Helvetica, sans-serif" id="ipl76" style="box-sizing: border-box;">р/с: BY68ALFA30132E03790010270000, БИК: ALFABY2X
+                  <font face="Arial, Helvetica, sans-serif" id="ipl76" style="box-sizing: border-box;">{{senderInfo.sender.label.payment}}
                   </font>
                 </font>
               </div>
               <div id="ihq744" class="text-decoration" style="box-sizing: border-box; padding: 5px 10px 0px 0px; border-collapse: separate; margin: 0 0 0 10px;">
                 <font color="#000000" id="ivnex" style="box-sizing: border-box;">
-                  <font face="Arial, Helvetica, sans-serif" id="iatg1" style="box-sizing: border-box;">ДО ВОСТРЕБОВАНИЯ, г. Минск, 220024
+                  <font face="Arial, Helvetica, sans-serif" id="iatg1" style="box-sizing: border-box;">{{senderInfo.sender.label.address}}
                   </font>
                 </font>
               </div>
               <div id="i9a377" class="text-decoration" style="box-sizing: border-box; padding: 5px 10px 0px 0px; border-collapse: separate; margin: 0 0 0 10px;">
                 <font color="#000000" id="iywni" style="box-sizing: border-box;">
-                  <font face="Arial, Helvetica, sans-serif" id="ionfc" style="box-sizing: border-box;">8 029 560-92-13
+                  <font face="Arial, Helvetica, sans-serif" id="ionfc" style="box-sizing: border-box;">{{senderInfo.sender.label.phone}}
                   </font>
                 </font>
               </div>
               <div id="inso6v" class="text-decoration" style="box-sizing: border-box; padding: 5px 10px 0px 0px; border-collapse: separate; margin: 0 0 0 10px;">
                 <font color="#000000" id="igt4b" style="box-sizing: border-box;">
-                  <font face="Arial, Helvetica, sans-serif" id="ifb9k" style="box-sizing: border-box;">ip.miazhevich@gmail.com
+                  <font face="Arial, Helvetica, sans-serif" id="ifb9k" style="box-sizing: border-box;">{{senderInfo.sender.label.email}}
                   </font>
                 </font>
               </div>
@@ -58,7 +58,7 @@
             </td>
             <td id="i0bk" width="45%" valign="top" style="box-sizing: border-box; font-size: 12px; font-weight: 300; vertical-align: top; color: rgb(111, 119, 125); margin: 0; padding: 0; width: 45%;">
               <div id="i4jx7" style="box-sizing: border-box; padding: 5px 10px 0px 10px; border-collapse: separate;">
-                <font color="#000000" face="Arial, Helvetica, sans-serif" id="i7d27" style="box-sizing: border-box;">Оплачено по договору № 15405 от 13.10.2023
+                <font color="#000000" face="Arial, Helvetica, sans-serif" id="i7d27" style="box-sizing: border-box;">Оплачено по договору {{senderInfo.sender.label.contract}}
                 </font>
               </div>
               <div id="i03jk" style="box-sizing: border-box; padding: 5px 10px 0px 10px; border-collapse: separate; margin: 10px 0 0 0;">
@@ -131,7 +131,7 @@
                 </tbody>
               </table>
               <div id="is6gd" style="box-sizing: border-box; padding: 5px 10px 0px 10px; border-collapse: separate; height: 21px;">
-                <strong id="inrx1" style="box-sizing: border-box;"><span id="iiu5o" style="box-sizing: border-box; font-family: Arial,Helvetica,sans-serif;"><span id="ia62c" style="box-sizing: border-box; color: #000000;">{{#if post.delivery.customer}}ВЗЫСКАТЬ ПЛАТУ ЗА ПЕРЕСЫЛКУ ПОЧТОВОГО{{else}}{{/if}}</span></span></strong>
+                <strong id="inrx1" style="box-sizing: border-box;"><span id="iiu5o" style="box-sizing: border-box; font-family: Arial,Helvetica,sans-serif;"><span id="ia62c" style="box-sizing: border-box; color: #000000;">{{#if post.delivery.customer}}ВЗЫСКАТЬ ПЛАТУ ЗА ПЕРЕСЫЛКУ ПОЧТОВОГО{{else}}Сумма отправления {{post.delivery.cost.integer}} руб. {{post.delivery.cost.float}} коп.{{/if}}</span></span></strong>
               </div>
               <div id="iypkh" style="box-sizing: border-box; padding: 5px 10px 0px 10px; border-collapse: separate; height: 21px;">
                 <strong id="iacp8" style="box-sizing: border-box;"><font color="#000000" face="Arial, Helvetica, sans-serif" id="iarx3g" style="box-sizing: border-box;">{{#if post.delivery.customer}}ОТПРАВЛЕНИЯ{{else}}{{/if}}
