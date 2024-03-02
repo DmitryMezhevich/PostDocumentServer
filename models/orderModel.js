@@ -11,7 +11,7 @@ module.exports = class OrderModel {
     constructor(module, name) {
         this.senderInfo = new SenderInformationModel(name);
 
-        const costOfProduct = parseFloat(String(module.K).replace(',', '.')) + (module.AD.toLowerCase().includes('лай') ? 3.60 : 0);
+        const costOfProduct = parseFloat(String(module.K).replace(',', '.')) + ((module.AD.toLowerCase().includes('лай') && module.AE.toLowerCase().includes('кл')) ? 3.60 : 0);
         const costOfDelivery = module.AF
             ? parseFloat(String(module.AF).replace(',', '.'))
             : '';

@@ -41,12 +41,14 @@ class DocumentHelper {
             controlDigit = 5;
         }
 
-        // Вставка контрольной цифры перед "BY" в строке
-        const index = inputString.indexOf('BY');
-        const stringWithControlDigit =
-            inputString.slice(0, index) +
-            controlDigit +
-            inputString.slice(index);
+        const stringWithControlDigit = `${inputString}${controlDigit}BY`;
+
+        // // Вставка контрольной цифры перед "BY" в строке
+        // const index = inputString.indexOf('BY');
+        // const stringWithControlDigit =
+        //     inputString.slice(0, index) +
+        //     controlDigit +
+        //     inputString.slice(index);
 
         return stringWithControlDigit;
     }
@@ -200,7 +202,7 @@ class DocumentHelper {
 
         // Отдельно делаем последнюю страницу гарантии
         const labelsHTML = await this.generateHTML(
-            senderInfo,
+            senderInfo[0],
             `warrantyCardLastPage.html`
         );
         await this.saveHTML(
