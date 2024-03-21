@@ -44,6 +44,7 @@ module.exports = class WarrantyModel {
             dateOfDispatch: `${dayFirst}.${monthFirst}.${yearFirst}`,
             warrantyPeriod: first.warrantyPeriod,
             customer: first.customer,
+            additionalMarks: first.additionalMarks,
         };
 
         this.second = {
@@ -55,6 +56,7 @@ module.exports = class WarrantyModel {
                 : '',
             warrantyPeriod: second ? second.warrantyPeriod : '',
             customer: second ? second.customer : '',
+            additionalMarks: second ? second.additionalMarks : '',
         };
     }
 };
