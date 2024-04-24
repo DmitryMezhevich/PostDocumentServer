@@ -5,7 +5,7 @@ module.exports = class SenderInformationModel {
         label: {
             name: 'ИП Межевич Дмитрий Сергеевич, УНП 491643493',
             payment: 'р/с: BY68ALFA30132E03790010270000, БИК: ALFABY2X',
-            address: 'ДО ВОСТРЕБОВАНИЯ, г. Минск, 220024',
+            address: 'ДО ВОСТРЕБОВАНИЯ, г. Минск, 220003',
             phone: '8 029 560-92-13',
             email: 'ip.miazhevich@gmail.com',
             contract: '15405 от 13.10.2023',
